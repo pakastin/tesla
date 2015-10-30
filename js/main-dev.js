@@ -66,6 +66,7 @@
   window.addEventListener('touchend', onTouchend);
 
   function onTouchstart(e) {
+    e.preventDefault();
     if (e.touches.length === 1) {
       if (e.touches[0].pageY < window.innerHeight / 2) {
         tesla.throttling = true;
