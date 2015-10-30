@@ -9,7 +9,8 @@ export default function Tesla () {
 Tesla.prototype.velocityChange = function (timeDelta) {
   if (this.throttling && this.braking) {
   } else if (this.throttling) {
-    this.velocity += 10 / 3 / timeDelta
+    var powerReduce = this.velocity / 62.4 * 9.5
+    this.velocity += (10 - powerReduce) / 3 / timeDelta
     if (this.velocity > 62.4) {
       this.velocity = 62.4
     }
