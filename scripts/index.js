@@ -21,6 +21,31 @@ document.body.appendChild($tesla)
 window.addEventListener('keydown', onKeydown)
 window.addEventListener('keyup', onKeyup)
 
+window.addEventListener('touchstart', onTouchstart)
+window.addEventListener('touchend', onTouchend)
+
+function onTouchstart (e) {
+  if (e.touches.length === 1) {
+    if (e.touches[0].pageY < window.innerHeight / 2) {
+      tesla.throttling = true
+    } else {
+      if (tesla.velocity > 0 || tesla.braking) {
+        tesla.braking = true
+      } else {
+        tesla.reversing = true
+      }
+    }
+  }
+}
+
+function onTouchend (e) {
+  if (e.touches.length === 1) {
+    tesla.throttling = false
+    tesla.braking = false
+    tesla.reversing = false
+  }
+}
+
 function onKeydown (e) {
   if (e.which === 38) {
     tesla.throttling = true
